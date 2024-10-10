@@ -39,10 +39,42 @@ if (( COUNT > INPUT_KEEP_REPORTS )); then
   cd ${GITHUB_WORKSPACE}
 fi
 
-#echo "index.html"
-echo "<!DOCTYPE html><meta charset=\"utf-8\"><meta http-equiv=\"refresh\" content=\"0; URL=${GITHUB_PAGES_WEBSITE_URL}/${INPUT_GITHUB_RUN_NUM}/index.html\">" > ./${INPUT_ALLURE_HISTORY}/index.html # path
-echo "<meta http-equiv=\"Pragma\" content=\"no-cache\"><meta http-equiv=\"Expires\" content=\"0\">" >> ./${INPUT_ALLURE_HISTORY}/index.html
-#cat ./${INPUT_ALLURE_HISTORY}/index.html
+echo "<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkbox Generator</title>
+  <script type="module">
+    import { suites } from './suites.js';
+
+    window.onload = () => {
+      const container = document.getElementById('checkbox-container');
+
+      Object.keys(suites).forEach(suite => {
+        const suiteTitle = document.createElement('h3');
+        suiteTitle.textContent = suite;
+        container.appendChild(suiteTitle);
+
+        suites[suite].forEach(spec => {
+          const label = document.createElement('label');
+          const checkbox = document.createElement('input');
+          checkbox.type = 'checkbox';
+          checkbox.value = spec;
+
+          label.appendChild(checkbox);
+          label.appendChild(document.createTextNode(spec));
+          container.appendChild(label);
+          container.appendChild(document.createElement('br'));
+        });
+      });
+    };
+  </script>
+</head>
+<body>
+  <div id="checkbox-container"></div>
+</body>
+" > ./${INPUT_ALLURE_HISTORY}/index.html # path
 
 #echo "executor.json"
 echo '{"name":"GitHub Actions","type":"github","reportName":"Allure Report with history",' > executor.json
