@@ -89,7 +89,7 @@ mv ./executor.json ./${INPUT_ALLURE_RESULTS}
 # echo "URL=${GITHUB_PAGES_WEBSITE_URL}" >> ./${INPUT_ALLURE_RESULTS}/environment.properties
 
 echo "Copy path files from Suites files"
-cp -r ./${INPUT_GH_PAGES}/suites.js ./${INPUT_ALLURE_RESULTS}/suites.js
+cp -r ./suites.js ./${INPUT_GH_PAGES}/suites.js
 
 echo "keep allure history from ${INPUT_GH_PAGES}/last-history to ${INPUT_ALLURE_RESULTS}/history"
 cp -r ./${INPUT_GH_PAGES}/last-history/. ./${INPUT_ALLURE_RESULTS}/history
