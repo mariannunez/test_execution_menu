@@ -8,7 +8,7 @@ npm init -y
 
 # Step 2: Install dependencies
 echo "Installing dependencies..."
-npm install express axios body-parser
+npm install express axios body-parser cors
 
 # Start the Node.js server
 echo "Starting server..."

@@ -1,8 +1,10 @@
 const express = require('express');
 const axios = require('axios');
+const cors = require('cors'); // Import cors
 
 const app = express();
 const port = process.env.PORT || 3000;
+app.use(cors());  // Enable CORS for all origins
 
 app.use(bodyParser.json());
 
