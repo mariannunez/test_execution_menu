@@ -33,40 +33,31 @@
 <body>
   <div id=checkbox-container></div>
   
+   <h1>Trigger GitHub Action from GitHub Pages</h1>
   <button id=trigger-action-btn>Trigger GitHub Action</button>
 
-    <script>
-        document.getElementById('trigger-action-btn').addEventListener('click', function() {
-            const repoOwner = 'mariannunez';  // Replace with your GitHub username
-            const repoName = 'test_execution_menu';  // Replace with your GitHub repository name
-            const workflowId = 'allure-report.yml';  // Replace with your workflow file name (e.g., action.yml)
-            const githubToken = ghs_25KNRIu854h6GQBreDFX2V1DS3flKs0ESi2s;  // Replace with your GitHub Personal Access Token
-
-            const url = 'https://api.github.com/repos///actions/workflows//dispatches';
-            const data = {
-                ref: 'main'  // Or the branch you want to trigger the action on
-            };
-
-            fetch(url, {
-                method: 'POST',
-                headers: {
-                    'Authorization': 'Bearer ghs_25KNRIu854h6GQBreDFX2V1DS3flKs0ESi2s',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            })
-            .then(response => {
-                if (response.ok) {
-                    alert('GitHub Action triggered successfully!');
-                } else {
-                    alert('Failed to trigger GitHub Action.');
-                }
-            })
-            .catch(error => {
-                console.error('Error triggering GitHub Action:', error);
-                alert('An error occurred.');
-            });
-        });
-    </script>
+  <script>
+    document.getElementById('trigger-action-btn').addEventListener('click', function() {
+      fetch('http://localhost:3000/trigger-action', {  // Replace with the URL of your backend
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          inputs: {
+            example_input: 'Triggered from GitHub Pages'
+          }
+        })
+      })
+      .then(response => response.json())
+      .then(data => {
+        alert('GitHub Action triggered successfully!');
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        alert('Failed to trigger GitHub Action.');
+      });
+    });
+  </script>
 </body>
 
