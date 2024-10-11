@@ -45,6 +45,9 @@ inputs:
     description: 'GitHub repository owner'
     required: true
     default: ${{ github.repository_owner }}
+  token:
+    description: 'Set a personal access token for pushing to the remote branch.'
+    required: false
   report_url:
     description: 'Use a custom URL instead of *.github.io'
     required: false

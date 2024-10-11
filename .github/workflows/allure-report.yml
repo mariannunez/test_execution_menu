@@ -20,9 +20,12 @@ jobs:
 
       - name: Allure Report action from marketplace
         uses: mariannunez/test_execution_menu@main
+        env:
+          AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
         if: always()
         #id: allure-report
         with:
+          TOKEN: ${{ secrets.GITHUB_TOKEN }}
           allure_results: allure-results
           #gh_pages: gh-pages
           #allure_report: allure-report
