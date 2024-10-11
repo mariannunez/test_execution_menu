@@ -73,6 +73,28 @@ echo "<!DOCTYPE html>
 </head>
 <body>
   <div id="checkbox-container"></div>
+  
+  <button id="triggerButton">Trigger GitHub Action</button>
+
+  <script>
+    document.getElementById('triggerButton').addEventListener('click', () => {
+      fetch('https://github.com/mariannunez/test_execution_menu/actions/manual', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          event_type: 'workflow_dispatch' // This should match the type in your GitHub Action workflow
+        })
+      }).then(response => {
+        if (response.ok) {
+          alert('GitHub Action triggered successfully!');
+        } else {
+          alert('Failed to trigger GitHub Action');
+        }
+      });
+    });
+  </script>
 </body>
 " > ./${INPUT_ALLURE_HISTORY}/index.html # path
 
