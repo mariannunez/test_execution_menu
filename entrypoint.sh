@@ -2,10 +2,21 @@
 
 unset JAVA_HOME
 
+# Step 1: Initialize npm project (creates package.json)
+echo "Initializing npm project..."
+npm init -y
+
+# Step 2: Install dependencies
+echo "Installing dependencies..."
+npm install express axios body-parser
+
+# Start the Node.js server
+echo "Starting server..."
+node server.js
+
 mkdir -p ./${INPUT_GH_PAGES}
 mkdir -p ./${INPUT_ALLURE_HISTORY}
 cp -r ./${INPUT_GH_PAGES}/. ./${INPUT_ALLURE_HISTORY}
-GITHUB_TOKEN=${INPUT_TOKEN}
 
 REPOSITORY_OWNER_SLASH_NAME=${INPUT_GITHUB_REPO}
 REPOSITORY_NAME=${REPOSITORY_OWNER_SLASH_NAME##*/}
@@ -75,41 +86,32 @@ echo "<!DOCTYPE html>
 <body>
   <div id="checkbox-container"></div>
   
+   <h1>Trigger GitHub Action from GitHub Pages</h1>
   <button id="trigger-action-btn">Trigger GitHub Action</button>
 
-    <script>
-        document.getElementById('trigger-action-btn').addEventListener('click', function() {
-            const repoOwner = 'mariannunez';  // Replace with your GitHub username
-            const repoName = 'test_execution_menu';  // Replace with your GitHub repository name
-            const workflowId = 'allure-report.yml';  // Replace with your workflow file name (e.g., "action.yml")
-            const githubToken = ${GITHUB_TOKEN};  // Replace with your GitHub Personal Access Token
-
-            const url = 'https://api.github.com/repos/${repoOwner}/${repoName}/actions/workflows/${workflowId}/dispatches';
-            const data = {
-                ref: 'main'  // Or the branch you want to trigger the action on
-            };
-
-            fetch(url, {
-                method: 'POST',
-                headers: {
-                    'Authorization': 'Bearer ${GITHUB_TOKEN}',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            })
-            .then(response => {
-                if (response.ok) {
-                    alert('GitHub Action triggered successfully!');
-                } else {
-                    alert('Failed to trigger GitHub Action.');
-                }
-            })
-            .catch(error => {
-                console.error('Error triggering GitHub Action:', error);
-                alert('An error occurred.');
-            });
-        });
-    </script>
+  <script>
+    document.getElementById('trigger-action-btn').addEventListener('click', function() {
+      fetch('http://localhost:3000/trigger-action', {  // Replace with the URL of your backend
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          inputs: {
+            example_input: 'Triggered from GitHub Pages'
+          }
+        })
+      })
+      .then(response => response.json())
+      .then(data => {
+        alert('GitHub Action triggered successfully!');
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        alert('Failed to trigger GitHub Action.');
+      });
+    });
+  </script>
 </body>
 " > ./${INPUT_ALLURE_HISTORY}/index.html # path
 
