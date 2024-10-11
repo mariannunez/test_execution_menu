@@ -1,12 +1,14 @@
+require('dotenv').config();
 const express = require('express');
 const axios = require('axios');
+const bodyParser = require('body-parser');
 
 const app = express();
 const port = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
 
-const GITHUB_TOKEN = process.env.INPUT_TOKEN; // Replace with your GitHub Personal Access Token
+const GITHUB_TOKEN = process.env.TOKEN; // Replace with your GitHub Personal Access Token
 const REPO_OWNER = 'mariannunez'; // Replace with your GitHub username
 const REPO_NAME = 'test_execution_menu'; // Replace with your repository name
 const WORKFLOW_ID = 'allure-report.yml'; // Replace with the name of your workflow file
@@ -23,7 +25,6 @@ app.post('/trigger-action', async (req, res) => {
       {
         headers: {
           'Authorization': `Bearer ${GITHUB_TOKEN}`,
-          'Accept': 'application/vnd.github.v3+json',
         },
       }
     );

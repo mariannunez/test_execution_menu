@@ -8,7 +8,7 @@ npm init -y
 
 # Step 2: Install dependencies
 echo "Installing dependencies..."
-npm install express axios body-parser
+npm install express axios body-parser dotenv
 
 # Start the Node.js server
 echo "Starting server..."
@@ -97,9 +97,7 @@ echo "<!DOCTYPE html>
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          inputs: {
-            example_input: 'Triggered from GitHub Pages'
-          }
+          inputs: {}
         })
       })
       .then(response => response.json())
