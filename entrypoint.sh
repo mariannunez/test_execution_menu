@@ -51,33 +51,33 @@ if (( COUNT > INPUT_KEEP_REPORTS )); then
   cd ${GITHUB_WORKSPACE}
 fi
 
-echo "<!DOCTYPE html>
+echo '<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Checkbox Generator</title>
   <script type="module">
-    import { suites } from './suites.js';
+    import { suites } from "./suites.js";
 
     window.onload = () => {
-      const container = document.getElementById('checkbox-container');
+      const container = document.getElementById("checkbox-container");
 
       Object.keys(suites).forEach(suite => {
-        const suiteTitle = document.createElement('h3');
+        const suiteTitle = document.createElement("h3");
         suiteTitle.textContent = suite;
         container.appendChild(suiteTitle);
 
         suites[suite].forEach(spec => {
-          const label = document.createElement('label');
-          const checkbox = document.createElement('input');
-          checkbox.type = 'checkbox';
+          const label = document.createElement("label");
+          const checkbox = document.createElement("input");
+          checkbox.type = "checkbox";
           checkbox.value = spec;
 
           label.appendChild(checkbox);
           label.appendChild(document.createTextNode(spec));
           container.appendChild(label);
-          container.appendChild(document.createElement('br'));
+          container.appendChild(document.createElement("br"));
         });
       });
     };
@@ -90,11 +90,11 @@ echo "<!DOCTYPE html>
   <button id="trigger-action-btn">Trigger GitHub Action</button>
 
   <script>
-    document.getElementById('trigger-action-btn').addEventListener('click', function() {
-      fetch('http://localhost:3000/trigger-action', {  // Replace with the URL of your backend
-        method: 'POST',
+    document.getElementById("trigger-action-btn").addEventListener("click", function() {
+      fetch("http://localhost:3000/trigger-action", {  // Replace with the URL of your backend
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
           inputs: {}
@@ -102,16 +102,16 @@ echo "<!DOCTYPE html>
       })
       .then(response => response.json())
       .then(data => {
-        alert('GitHub Action triggered successfully!');
+        alert("GitHub Action triggered successfully!");
       })
       .catch(error => {
-        console.error('Error:', error);
-        alert('Failed to trigger GitHub Action.');
+        console.error("Error:", error);
+        alert("Failed to trigger GitHub Action.");
       });
     });
   </script>
 </body>
-" > ./${INPUT_ALLURE_HISTORY}/index.html # path
+' > ./${INPUT_ALLURE_HISTORY}/index.html # path
 
 #echo "executor.json"
 echo '{"name":"GitHub Actions","type":"github","reportName":"Allure Report with history",' > executor.json
