@@ -84,7 +84,7 @@ echo "<!DOCTYPE html>
             const workflowId = 'allure-report.yml';  // Replace with your workflow file name (e.g., "action.yml")
             const githubToken = ${GITHUB_TOKEN};  // Replace with your GitHub Personal Access Token
 
-            const url = `https://api.github.com/repos/${repoOwner}/${repoName}/actions/workflows/${workflowId}/dispatches`;
+            const url = 'https://api.github.com/repos/${repoOwner}/${repoName}/actions/workflows/${workflowId}/dispatches';
             const data = {
                 ref: 'main'  // Or the branch you want to trigger the action on
             };
@@ -92,7 +92,7 @@ echo "<!DOCTYPE html>
             fetch(url, {
                 method: 'POST',
                 headers: {
-                    'Authorization': `Bearer ${GITHUB_TOKEN}`,
+                    'Authorization': 'Bearer ${GITHUB_TOKEN}',
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(data)
