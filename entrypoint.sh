@@ -97,9 +97,7 @@ echo "<!DOCTYPE html>
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          inputs: {
-            example_input: 'Triggered from GitHub Pages'
-          }
+          inputs: {}
         })
       })
       .then(response => response.json())
