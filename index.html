@@ -40,7 +40,7 @@
             const repoOwner = 'mariannunez';  // Replace with your GitHub username
             const repoName = 'test_execution_menu';  // Replace with your GitHub repository name
             const workflowId = 'allure-report.yml';  // Replace with your workflow file name (e.g., action.yml)
-            const githubToken = ;  // Replace with your GitHub Personal Access Token
+            const githubToken = ghs_25KNRIu854h6GQBreDFX2V1DS3flKs0ESi2s;  // Replace with your GitHub Personal Access Token
 
             const url = 'https://api.github.com/repos///actions/workflows//dispatches';
             const data = {
@@ -50,7 +50,7 @@
             fetch(url, {
                 method: 'POST',
                 headers: {
-                    'Authorization': 'Bearer ',
+                    'Authorization': 'Bearer ghs_25KNRIu854h6GQBreDFX2V1DS3flKs0ESi2s',
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(data)
