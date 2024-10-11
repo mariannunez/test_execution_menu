@@ -82,7 +82,7 @@ echo "<!DOCTYPE html>
             const repoOwner = 'mariannunez';  // Replace with your GitHub username
             const repoName = 'test_execution_menu';  // Replace with your GitHub repository name
             const workflowId = 'allure-report.yml';  // Replace with your workflow file name (e.g., "action.yml")
-            const githubToken = ${githubToken};  // Replace with your GitHub Personal Access Token
+            const githubToken = ${GITHUB_TOKEN};  // Replace with your GitHub Personal Access Token
 
             const url = `https://api.github.com/repos/${repoOwner}/${repoName}/actions/workflows/${workflowId}/dispatches`;
             const data = {
